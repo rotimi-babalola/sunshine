@@ -11,8 +11,13 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VTextField,
+  VSubHeader,
   transitions,
 } from 'vuetify';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
 import App from './App';
 import '../node_modules/vuetify/src/stylus/app.styl';
 
@@ -26,6 +31,8 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
+    VTextField,
+    VSubHeader,
     transitions,
   },
   theme: {
@@ -38,6 +45,8 @@ Vue.use(Vuetify, {
     warning: '#FFC107',
   },
 });
+
+Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
