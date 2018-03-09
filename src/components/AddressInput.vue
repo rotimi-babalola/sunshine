@@ -57,7 +57,6 @@ export default {
         this.axios.get(sunriseUrl).then((response) => {
           this.loading = false;
           this.sunshineData = response.data;
-          console.log(response, '+++++');
           this.$emit('fetchSunshine', this.sunshineData);
         });
       }).catch((error) => {

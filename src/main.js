@@ -49,6 +49,8 @@ Vue.use(Vuetify, {
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
+
 
 /* eslint-disable no-new */
 new Vue({

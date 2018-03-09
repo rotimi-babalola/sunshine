@@ -8,7 +8,7 @@
     </v-toolbar>
     <v-content>
       <address-input @fetchSunshine="fetchSunshine"/>
-      <display-sunshine :data.sync="result"/>
+      <display-sunshine :data.sync="sunshineData"/>
     </v-content>
   </v-app>
 </template>
@@ -20,7 +20,7 @@ import DisplaySunshine from './components/DisplaySunshine';
 export default {
   data() {
     return {
-      result: []
+      sunshineData: [],
     };
   },
   name: 'App',
@@ -28,17 +28,10 @@ export default {
     AddressInput,
     DisplaySunshine,
   },
-  created() {
-    this.sayHello();
-  },
   methods: {
-    sayHello() {
-      // console.log('hello');
-    },
     fetchSunshine(data) {
-      console.log(data, 'fetchSunshine')
-      this.result = data;
-    }
+      this.sunshineData = data;
+    },
   },
 };
 </script>
