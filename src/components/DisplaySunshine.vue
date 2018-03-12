@@ -1,7 +1,23 @@
 <template>
     <div class="display-sunshine">
-        <h2>Sunrise: {{sunshineData.results.sunrise}}</h2>
-        <h2>Sunset: {{sunshineData.results.sunset}}</h2>
+        <v-layout>
+          <v-flex xs12 sm6 offset-sm1>
+            <v-card class="sunshine-card" v-if="sunshineData">
+            <!-- put an icon here  -->
+            <v-card-title primary-title>
+              <div>
+                <h3 class="headline mb-0" v-if="address">{{address}}</h3>
+                <div class="sunrise">Sunrise: {{sunshineData.sunrise}}</div>
+                <div>Sunset: {{sunshineData.sunset}}</div>
+              </div>
+            </v-card-title>
+            <v-card-actions>
+              <v-btn flat color="primary">Share</v-btn>
+              <v-btn flat color="primary">Explore</v-btn>
+            </v-card-actions>
+          </v-card>
+          </v-flex>
+        </v-layout>
     </div>
 </template>
 
@@ -11,13 +27,19 @@ export default {
   data() {
     return {};
   },
+  console: window.console,
   computed: {
     sunshineData: {
       get() {
-        return this.data;
+        return this.data.results;
       },
       set(newValue) {
         this.data = newValue;
+      },
+    },
+    address: {
+      get() {
+        return this.data.address;
       },
     },
   },
@@ -27,5 +49,13 @@ export default {
 <style scoped>
 .display-sunshine {
   margin: 20px;
+}
+
+.sunrise {
+  margin-top: 10px;
+}
+
+.sunshine-card {
+  max-width: 350px;
 }
 </style>
