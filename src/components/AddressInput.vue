@@ -5,12 +5,15 @@
         <v-subheader>Enter a location</v-subheader>
       </v-flex>
       <v-flex xs4>
-        <v-text-field
-          name="input-3"
-          label="Location"
-          id="address"
-          v-model="address"
-        ></v-text-field>
+        <vuetify-google-autocomplete
+            ref="address"
+            id="map"
+            classname="form-control"
+            placeholder="Please type your address"
+            v-on:placechanged="getAddressData"
+            v-model="address"
+        >
+        </vuetify-google-autocomplete>
       </v-flex>
       <v-flex xs4>
         <v-btn 
@@ -36,34 +39,26 @@ export default {
     };
   },
   methods: {
-    geoCode(address) {
-      const geoCodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyACsOOaTMdzaRGfYETTkc_5FsmW52fqTbU`;
-      return this.axios.get(geoCodeUrl).then((response) => {
-        return {
-          latitude: response.data.results[0].geometry.location.lat,
-          longitude: response.data.results[0].geometry.location.lng,
-          address: response.data.results[0].formatted_address,
-        };
+    fetchSunshine() {
+      this.loading = true;
+      // call sunrise api 😎
+      // accept optional time value???
+      const sunriseUrl = `https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}`;
+      this.axios.get(sunriseUrl).then((response) => {
+        this.loading = false;
+        this.sunshineData = response.data;
+        this.sunshineData.address = this.address;
+        this.$emit('fetchSunshine', this.sunshineData);
+        // clear address if API call is successful
+        this.address = '';
       }).catch((error) => {
         this.error.push(error);
       });
     },
-    fetchSunshine() {
-      this.loading = true;
-      this.geoCode(this.address).then((data) => {
-        const { latitude, longitude, address } = data;
-        // call sunrise api 😎
-        // accept optional time value???
-        const sunriseUrl = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}`;
-        this.axios.get(sunriseUrl).then((response) => {
-          this.loading = false;
-          this.sunshineData = response.data;
-          this.sunshineData.address = address;
-          this.$emit('fetchSunshine', this.sunshineData);
-        });
-      }).catch((error) => {
-        this.error.push(error);
-      });
+    getAddressData(addressData) {
+      this.address = addressData.route;
+      this.latitude = addressData.latitude;
+      this.longitude = addressData.longitude;
     },
   },
 };

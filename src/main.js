@@ -18,6 +18,7 @@ import {
 } from 'vuetify';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete';
 
 import App from './App';
 import '../node_modules/vuetify/src/stylus/app.styl';
@@ -49,6 +50,10 @@ Vue.use(Vuetify, {
 });
 
 Vue.use(VueAxios, axios);
+
+Vue.use(VuetifyGoogleAutocomplete, {
+  apiKey: 'AIzaSyAwY-el22P4vA_ciSF3ND7BbK2VKj88YC0',
+});
 
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
