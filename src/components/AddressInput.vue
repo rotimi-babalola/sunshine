@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       address: '',
-      sunshineData: [],
+      sunshineData: {},
       error: [],
       loading: false,
     };
@@ -42,6 +42,7 @@ export default {
         return {
           latitude: response.data.results[0].geometry.location.lat,
           longitude: response.data.results[0].geometry.location.lng,
+          address: response.data.results[0].formatted_address,
         };
       }).catch((error) => {
         this.error.push(error);
@@ -50,13 +51,14 @@ export default {
     fetchSunshine() {
       this.loading = true;
       this.geoCode(this.address).then((data) => {
-        const { latitude, longitude } = data;
+        const { latitude, longitude, address } = data;
         // call sunrise api 😎
         // accept optional time value???
         const sunriseUrl = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}`;
         this.axios.get(sunriseUrl).then((response) => {
           this.loading = false;
           this.sunshineData = response.data;
+          this.sunshineData.address = address;
           this.$emit('fetchSunshine', this.sunshineData);
         });
       }).catch((error) => {

@@ -13,6 +13,7 @@ import {
   VToolbar,
   VTextField,
   VSubHeader,
+  VCard,
   transitions,
 } from 'vuetify';
 import axios from 'axios';
@@ -33,6 +34,7 @@ Vue.use(Vuetify, {
     VToolbar,
     VTextField,
     VSubHeader,
+    VCard,
     transitions,
   },
   theme: {
