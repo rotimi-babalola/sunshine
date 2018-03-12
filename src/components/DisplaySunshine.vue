@@ -53,6 +53,7 @@ export default {
 
 .sunrise {
   margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .sunshine-card {
