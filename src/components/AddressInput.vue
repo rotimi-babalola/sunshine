@@ -83,13 +83,9 @@ export default {
   },
   methods: {
     fetchSunshine() {
-      let sunriseUrl;
       this.loading = true;
       // call sunrise api 😎 ☀️
-      if (this.date) {
-        sunriseUrl = `https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=today`;
-      }
-      sunriseUrl = `https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${this.date}`;
+      const sunriseUrl = `https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=${this.date ? this.date : 'today'}`;
       this.axios.get(sunriseUrl).then((response) => {
         this.loading = false;
         this.sunshineData = response.data;
