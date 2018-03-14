@@ -14,6 +14,8 @@ import {
   VTextField,
   VSubHeader,
   VCard,
+  VDatePicker,
+  VMenu,
   transitions,
 } from 'vuetify';
 import axios from 'axios';
@@ -36,6 +38,8 @@ Vue.use(Vuetify, {
     VTextField,
     VSubHeader,
     VCard,
+    VDatePicker,
+    VMenu,
     transitions,
   },
   theme: {
