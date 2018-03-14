@@ -85,8 +85,7 @@ export default {
     fetchSunshine() {
       let sunriseUrl;
       this.loading = true;
-      // call sunrise api 😎
-      // accept optional time value???
+      // call sunrise api 😎 ☀️
       if (this.date) {
         sunriseUrl = `https://api.sunrise-sunset.org/json?lat=${this.latitude}&lng=${this.longitude}&date=today`;
       }
