@@ -58,6 +58,7 @@
       <v-flex xs4 offset-sm3>
         <v-btn 
         class="go-button" 
+        round
         @click="fetchSunshine"
         :loading="loading"
         :disabled="!address"
@@ -90,15 +91,17 @@ export default {
         this.loading = false;
         this.sunshineData = response.data;
         this.sunshineData.address = this.address;
+        this.sunshineData.utcOffset = this.utcOffset;
         this.$emit('fetchSunshine', this.sunshineData);
       }).catch((error) => {
         this.error.push(error);
       });
     },
-    getAddressData(addressData) {
+    getAddressData(addressData, placeResultData) {
       this.address = addressData.route;
       this.latitude = addressData.latitude;
       this.longitude = addressData.longitude;
+      this.utcOffset = placeResultData.utc_offset;
     },
     saveDate() {
       // really don't see the point of this yet...
