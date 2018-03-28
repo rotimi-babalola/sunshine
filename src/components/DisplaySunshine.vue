@@ -57,11 +57,7 @@ export default {
   filters: {
     formatUTC(dateString, utcOffset) {
       const date = moment(dateString, 'h:mm:ss A');
-      if (utcOffset > 0) {
-        date.subtract(utcOffset / 60, 'hours');
-      } else {
-        date.add(utcOffset / 60, 'hours');
-      }
+      date.add(utcOffset / 60, 'hours');
       return date.format('h:mm:ss A');
     },
   },
